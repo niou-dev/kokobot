@@ -18,8 +18,8 @@ var authorId = "";
 var authorTag = "";
 var myBool = true;
 
-const file1 = new MessageAttachment("pn.jpg")
-const file2 = new MessageAttachment("giatros.jpg")
+const file1 = new MessageAttachment("./images/pn.jpg")
+const file2 = new MessageAttachment("./images/giatros.jpg")
 
 //Bot checks if it gets called so it can proccess the next message
 
@@ -113,6 +113,15 @@ client.on("message", msg => {
         if (msg.content.toLowerCase().includes("gif")) {
             msg.reply("Pes mou thema");
             gifbool = true;            
+        }
+
+        // I will add a weather option with OpenWeather API
+
+        if (msg.content.toLowerCase().includes("Ti kairo kanei?")) {
+            msg.reply("Mhn viazesai, tha to ftiaksoume kai afto")
+
+
+            call = false;
         }
     }
 });
