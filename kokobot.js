@@ -39,58 +39,61 @@ client.on("message", msg => {
 });
 
 //If the bot gets called it will proccess the next message for a matched keyword
-client.on("message", msg => {
+client.on("message", async (msg) => {
     if ((call === true) && (msg.author.id === authorId)) {
         
         if (msg.content.toLowerCase().includes("kalhmera") || msg.content.toLowerCase().includes("kalimera")) {
-            msg.reply("Kalhmera kai se esena");
+            await msg.reply("Kalhmera kai se esena");
             call = false;
         }
         
         if (msg.content.toLowerCase() === 'kkk') {
-            msg.reply("Auto Kokolis, find your next automobile today.");
+            await msg.reply("Auto Kokolis, find your next automobile today.");
             call = false;
         }
         
         if (msg.content.toLowerCase().includes("mpakaoukas")) {
-            msg.reply("A re vlaxo");
+            await msg.reply("A re vlaxo");
             call = false;
         }
         
         if ((msg.content.toLowerCase().includes("makos") && msg.content.toLowerCase().includes("pou")) && msg.content.toLowerCase().includes("einai")) {
-            msg.reply("Yphretei thn patrida");
-            msg.channel.send(file1);
+            await msg.reply("Yphretei thn patrida, sthn Gallia ;)");
+            await msg.channel.send(file1);
             call = false;
         }
 
         if (msg.content.toLowerCase().includes("giatros")) {
-            msg.reply("Megas Mpakaoukas <:giatros:828371414452273182>");
-            msg.channel.send(file2);
+            await msg.reply("Megas Mpakaoukas <:giatros:828371414452273182>");
+            await msg.channel.send(file2);
             call = false;
         }
         
         if (msg.content.toLowerCase().includes("nionios")) {
-            msg.reply("Fevgei gia mparko:(");
+            await msg.reply({
+                content: 'Fevgei gia mparko:(',
+                stickers: ['1366432644706996276']
+            })
             call = false;
         }
 
         if (msg.content.toLowerCase().includes("kourases") || msg.content.toLowerCase().includes("psofa") || msg.content.toLowerCase().includes("malaka") || msg.content.toLowerCase().includes("malakismeno") || msg.content.toLowerCase().includes("gamhsou") || msg.content.toLowerCase().includes("gamw") || msg.content.toLowerCase().includes("gamiesai") || msg.content.toLowerCase().includes("mouni") || msg.content.toLowerCase().includes("pousth"))  {
-            msg.reply("Se afton ton server sevomaste o enas ton allon, se parakalw symorfwsou, eidallws tha fas ban");
+            await msg.reply("Se afton ton server sevomaste o enas ton allon, se parakalw symorfwsou, eidallws tha fas ban");
             call = false;
         }
 
         if (msg.content.toLowerCase().includes("mixas") || msg.content.toLowerCase().includes("louris") || msg.content.toLowerCase().includes("lourhs") || msg.content.toLowerCase().includes("vaggelis") || msg.content.toLowerCase().includes("vaggelhs") || msg.content.toLowerCase().includes("psixas")) {
-            msg.reply("Paei Kina:( <:mixaskalhmera:928683390977339442>");
+            await msg.reply("Paei Kina:( <:mixaskalhmera:928683390977339442>");
             call = false;
         }
 
         if (msg.content.toLowerCase().includes("mpartis")) {
-            msg.reply("My creator");
+            await msg.reply("My creator");
             call = false;
         }
 
         if (msg.content.toLowerCase().includes("agapiou")) {
-            msg.channel.send("<:dagkoseme:925439555748896768>");
+            await msg.channel.send("<:dagkoseme:925439555748896768>");
             call = false;
             
         }
@@ -105,7 +108,7 @@ client.on("message", msg => {
             } else {
                 minutes = ts.getMinutes();
             }
-            msg.reply(hours + ":" + minutes);
+            await msg.reply(hours + ":" + minutes);
             call = false;
         }
 
@@ -119,7 +122,7 @@ client.on("message", msg => {
         }
 
         if (msg.content.toLowerCase().includes("gif")) {
-            msg.reply("Pes mou thema");
+            await msg.reply("Pes mou thema");
             gifbool = true;            
         }
 
