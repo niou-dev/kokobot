@@ -47,7 +47,7 @@ client.on("message", msg => {
         }
         
         if (msg.content.toLowerCase() === 'kkk') {
-            msg.reply("Roufokolis");
+            msg.reply("Auto Kokolis, find your next automobile today.");
             call = false;
         }
         
@@ -130,4 +130,5 @@ client.on("message", msg => {
 
 
 client.login(process.env.DISC_API);
+
 
