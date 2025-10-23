@@ -3,7 +3,8 @@ const {MessageAttachment} = require("discord.js");
 const client = new Discord.Client();
 const dotenv = require("dotenv");
 dotenv.config();
-const giphy = require("giphy-api")(process.env.GIPHY_API)
+const giphy = require("giphy-api")(process.env.GIPHY_API);
+const WEATHER_API = process.env.OPEN_WEATHER_API;
 
 
 client.on("ready", () => {
@@ -97,7 +98,14 @@ client.on("message", msg => {
         // time       
         if (msg.content.toLowerCase().includes("ti wra einai")) {
             let ts = new Date();
-            msg.reply(ts.getHours() + ":" + ts.getMinutes());
+            let hours = ts.getHours;
+            let minutes;
+            if (ts.getMinutes() <= 9) {
+                minutes = "0" + ts.getMinutes();
+            } else {
+                minutes = ts.getMinutes();
+            }
+            msg.reply(hours + ":" + minutes);
             call = false;
         }
 
@@ -115,14 +123,30 @@ client.on("message", msg => {
             gifbool = true;            
         }
 
-        // I will add a weather option with OpenWeather API
+        if (msg.content.toLowerCase().includes("kairos")) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=37.963372112430754&lon=23.49497107391491&appid=${WEATHER_API}&units=metric`;
 
-        if (msg.content.toLowerCase().includes("Ti kairo kanei?")) {
-            msg.reply("Mhn viazesai, tha to ftiaksoume kai afto")
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error("Request failed");
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    let temp = data.main.temp;
+                    let desc = data.weather[0].description;
+                    let humidity = data.main.humidity;
 
+                    msg.reply(`Exei ${temp} vathmous, ${desc} kai ${humidity}% ugrasia.`);
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    msg.reply("Kati pige strava me ton kairo 😔");
+                });
 
             call = false;
         }
+
     }
 });
 
